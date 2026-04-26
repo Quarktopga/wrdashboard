@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Analytique – ASK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Dashboard Analytique – ASK</h1>
+        <p class="subtitle">Analyse des interactions enregistrées dans Supabase</p>
+    </header>
+
+    <section class="metrics">
+        <div class="metric-card">
+            <h2>Total questions</h2>
+            <div id="metric-total" class="metric-value">–</div>
+        </div>
+
+        <div class="metric-card">
+            <h2>Taux de compréhension</h2>
+            <div id="metric-understood-rate" class="metric-value">–</div>
+        </div>
+
+        <div class="metric-card">
+            <h2>Non comprises</h2>
+            <div id="metric-not-understood" class="metric-value">–</div>
+        </div>
+    </section>
+
+    <section class="toolbar">
+        <button id="btn-refresh">Rafraîchir</button>
+        <span id="last-refresh" class="muted">Dernier rafraîchissement : –</span>
+    </section>
+    <section class="charts">
+    <div class="chart-card">
+        <h2>Répartition par catégorie</h2>
+        <canvas id="chart-categories"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h2>Taux de compréhension</h2>
+        <canvas id="chart-understanding"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h2>Usage USER vs TEST</h2>
+        <canvas id="chart-usage"></canvas>
+    </div>
+</section>
+
+    <section class="filters">
+    <label>
+        Catégorie :
+        <select id="filter-category">
+            <option value="">Toutes</option>
+            <option value="fiche-import">fiche-import</option>
+            <option value="chapitre-creation">chapitre-creation</option>
+            <option value="matiere">matiere</option>
+            <option value="chapitre">chapitre</option>
+            <option value="fiche">fiche</option>
+            <option value="feedback">feedback</option>
+            <option value="entrainement">entrainement</option>
+            <option value="ask">ask</option>
+            <option value="fonctionnement">fonctionnement</option>
+            <option value="plateforme">plateforme</option>
+            <option value="supabase">supabase</option>
+            <option value="unknown">unknown</option>
+            <option value="bonjour">bonjour</option>
+        </select>
+    </label>
+
+    <label>
+        Usage :
+        <select id="filter-usage">
+            <option value="">Tous</option>
+            <option value="USER">USER</option>
+            <option value="TEST">TEST</option>
+        </select>
+    </label>
+</section>
+
+    <section class="table-section">
+        <h2>Dernières questions</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Compris</th>
+                    <th>Question</th>
+                    <th>Date</th>
+                    <th>Catégorie</th>
+                    <th>Usage</th>
+
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <tr><td colspan="5" class="muted">Chargement…</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="charts.js"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>

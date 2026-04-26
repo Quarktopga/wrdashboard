@@ -1,0 +1,88 @@
+/* ------------------------------
+   STYLE GLOBAL DU DASHBOARD
+--------------------------------*/
+
+:root {
+    --bg: #f7f7f7;
+    --text: #222;
+    --primary: #4a6cf7;
+    --card-bg: #fff;
+    --radius: 14px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    padding: 20px;
+}
+
+/* ------------------------------
+   HEADER
+--------------------------------*/
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-top: 6px;
+    color: #555;
+}
+
+/* ------------------------------
+   CARDS
+--------------------------------*/
+
+.cards {
+    display: grid;
+    gap: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.card {
+    display: block;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: var(--primary);
+}
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #777;
+    font-size: 0.9rem;
+}
