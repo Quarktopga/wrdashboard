@@ -37,7 +37,7 @@ async function loadData() {
         .from("visites")
         .select("id, device, page, arrived_at, duration_seconds, usage, created_at")
         .order("created_at", { ascending: false })
-        .limit(10000);
+        .limit(100000);
 
     if (error) {
         console.error(error);
