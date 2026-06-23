@@ -30,22 +30,42 @@ function formatDate(iso) {
 }
 
 // ---------------------------------------------
-// 📥 CHARGEMENT DES DONNÉES
+// 📥 CHARGEMENT DES DONNÉES (AVEC PAGINATION)
 // ---------------------------------------------
 async function loadData() {
-    const { data, error } = await client
-        .from("visites")
-        .select("id, device, page, arrived_at, duration_seconds, usage, created_at")
-        .order("created_at", { ascending: false })
-        .limit(100000);
+    let allRows = [];
+    let page = 0;
+    const pageSize = 1000;
+    let hasMore = true;
 
-    if (error) {
-        console.error(error);
-        tableBody.innerHTML = `<tr><td colspan="5">Erreur : ${error.message}</td></tr>`;
-        return;
+    // Récupérer toutes les données par pages
+    while (hasMore) {
+        const { data, error } = await client
+            .from("visites")
+            .select("id, device, page, arrived_at, duration_seconds, usage, created_at")
+            .order("created_at", { ascending: false })
+            .range(page * pageSize, (page + 1) * pageSize - 1);
+
+        if (error) {
+            console.error(error);
+            tableBody.innerHTML = `<tr><td colspan="5">Erreur : ${error.message}</td></tr>`;
+            return;
+        }
+
+        if (!data || data.length === 0) {
+            hasMore = false;
+        } else {
+            allRows = allRows.concat(data);
+            page++;
+            // Arrêter à 100k pour ne pas surcharger
+            if (allRows.length >= 100000) {
+                allRows = allRows.slice(0, 100000);
+                hasMore = false;
+            }
+        }
     }
 
-    const rows = data || [];
+    const rows = allRows;
 
     // Normalisation usage
     rows.forEach(r => {
